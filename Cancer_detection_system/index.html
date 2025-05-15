@@ -1,0 +1,40 @@
+<!-- Define the document type and language -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Set the character encoding for the document -->
+    <meta charset="UTF-8">
+
+    <!-- Set the title that appears in the browser tab -->
+    <title>Image classifier</title>
+
+    <!-- Link to external CSS file for styling (located in the /static/ directory) -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    <!-- Link to external JavaScript file (also located in /static/) -->
+    <!-- 'defer' ensures the script loads after the HTML is parsed -->
+    <script src="{{ url_for('static', filename='script.js') }}" defer></script>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Upload an image</h1>
+
+        <form method="POST" enctype="multipart/form-data">
+            <input type="file" name="imagen" accept="image/*" required>
+            <button type="submit">Predict</button>
+        </form>
+
+        {% if image_url %}
+            <h3>Uploaded image:</h3>
+            <img src="{{ image_url }}" alt="Uploaded image" width="300">
+        {% endif %}
+
+        {% if result %}
+            <h2>{{ result }}</h2>
+        {% endif %}
+    </div>
+</body>
+</html>
+
